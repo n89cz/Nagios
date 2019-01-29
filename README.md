@@ -7,3 +7,5 @@ check_process.sh - Nagios plugin that checks if docker daemon is up or down
 check_docker_container.sh - check container status
 
 check_ssl.sh - 
+
+text_check.sh

@@ -25,15 +25,11 @@ SECONDS_NOW=`date +%s`
 
 
 if [ "$SECONDS_NOW" -gt "$CRITSEC" ] ; then
-    echo "CRITICAL - Two days to certificate expiration"
+    echo "CRITICAL - Certificate expires very soon! FIX ASAP!"
     exit $NAGIOS_CRITICAL
 elif [ "$SECONDS_NOW" -gt "$WRNSEC" ] ; then
     echo "WARNING - Five days to certificate expiration"
     exit $NAGIOS_WARNING
 fi
-
-
-#echo "Not after sec: "$NOT_AFTER_SEC
-#echo "Warning sec: " $WRNSEC
 
 exit $NAGIOS_OK

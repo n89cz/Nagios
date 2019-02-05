@@ -20,12 +20,12 @@ fi
 
 CURL_OUTPUT=$(curl -s -o /dev/null -w "%{http_code}" $CHECK_URL)
 
-echo $CURL_OUTPUT
+#echo $CURL_OUTPUT
 
 if [ "$CURL_OUTPUT" == "$CURL_OK" ] ; then
-    echo "OK - WEB is UP"
-    exit 0
+    echo "OK - WEB is UP";
+    exit 0;
 elif [ "$CURL_OUTPUT" != "$CURL_OK" ] ; then
-    echo "CHYBA CURL FAILURE $CURL_OUTPUT"
-    exit 2
+    echo "CHYBA CURL FAILURE $CURL_OUTPUT";
+    exit 2;
 fi

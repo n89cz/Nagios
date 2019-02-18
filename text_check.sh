@@ -13,11 +13,12 @@ DOMAIN=$1
 SEARCHED_STRING=$2
 
 function finish {
-    rm index.html
+    rm /tmp/index.html
 }
 
-wget https://$DOMAIN
+wget https://$DOMAIN -O /tmp/index.html
 #wget https://pujcimmoto.cz
+#-O /path/to/folder/file.ext
 
 if grep -q 'Rodinná motopůjčovna nabízející nezapomenutelný zážitek v jedné stopě.' index.html
 then

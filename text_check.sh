@@ -16,17 +16,28 @@ function finish {
     rm /tmp/index.html
 }
 
-wget https://$DOMAIN -O /tmp/index.html
-#wget https://pujcimmoto.cz
-#-O /path/to/folder/file.ext
-
-if grep -q 'Rodinná motopůjčovna nabízející nezapomenutelný zážitek v jedné stopě.' /tmp/index.html
-then
-    finish
-    echo "Hledana odpoved nalezena"
-    exit 0
-else
-    finish
-    echo "Nenalezena hledana odpoved"
+function file_exists () {
+if [ ! -f /tmp/test.file ]; then
+    echo "$1"
     exit 2
+fi
+}
+
+wget https://pujcimmoto.cz -O /tmp/test.file
+
+file_exists "prvni krok - soubor nenalezen"
+
+    if grep -q 'Rodinná půjčovna motocyklů' /tmp/test.file
+    then
+#	finish
+	file_exists
+	echo "Hledana odpoved nalezena"
+	exit 0
+    else
+#	finish
+	file_exists
+	echo "Nenalezena hledana odpoved"
+	exit 2
+    fi
+
 fi

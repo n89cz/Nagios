@@ -13,32 +13,29 @@ DOMAIN=$1
 SEARCHED_STRING=$2
 
 function finish {
-    rm /tmp/index.html
+    rm /tmp/pujcimmoto.file
 }
 
 function file_exists () {
 if [ ! -f /tmp/pujcimmoto.file ]; then
     echo "$1"
-    exit 2
+    exit 3
 fi
 }
 
-echo $DOMAIN > /tmp/testovac
-
-#wget https://pujcimmoto.cz -O /tmp/test.file
 wget $DOMAIN -O /tmp/pujcimmoto.file
 
-file_exists "prvni krok - soubor nenalezen"
+file_exists "File not found in step 1"
 
     if grep -q 'Rodinná půjčovna motocyklů' /tmp/pujcimmoto.file
     then
-#	finish
-	file_exists
+	file_exists "File not found in step 2"
+	finish
 	echo "Hledana odpoved nalezena"
 	exit 0
     else
-#	finish
-	file_exists
+	file_exists "File not found in step 3"
+	finish
 	echo "Nenalezena hledana odpoved"
 	exit 2
     fi

@@ -17,17 +17,20 @@ function finish {
 }
 
 function file_exists () {
-if [ ! -f /tmp/test.file ]; then
+if [ ! -f /tmp/pujcimmoto.file ]; then
     echo "$1"
     exit 2
 fi
 }
 
-wget https://pujcimmoto.cz -O /tmp/test.file
+echo $DOMAIN > /tmp/testovac
+
+#wget https://pujcimmoto.cz -O /tmp/test.file
+wget $DOMAIN -O /tmp/pujcimmoto.file
 
 file_exists "prvni krok - soubor nenalezen"
 
-    if grep -q 'Rodinná půjčovna motocyklů' /tmp/test.file
+    if grep -q 'Rodinná půjčovna motocyklů' /tmp/pujcimmoto.file
     then
 #	finish
 	file_exists

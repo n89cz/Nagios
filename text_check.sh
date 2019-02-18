@@ -3,6 +3,20 @@
 # Nagios script to check text on webpage
 #
 
+#TODO:
+# 1.
+# put searched string to $SEARCHED_STRING and use Nagios to pass the data
+#
+#
+# 2.
+# Make tmp file name independant - use for example current datetime as name of the file
+#
+#
+# Make sure the script is universal, only thing you need to change is configuration of Nagios command
+#
+
+
+
 #Nagios return codes
 # 0 OK
 # 1 warning
@@ -31,12 +45,12 @@ file_exists "File not found in step 1"
     then
 	file_exists "File not found in step 2"
 	finish
-	echo "Hledana odpoved nalezena"
+	echo "OK - searched string found"
 	exit 0
     else
 	file_exists "File not found in step 3"
 	finish
-	echo "Nenalezena hledana odpoved"
+	echo "Failure - searched string not found"
 	exit 2
     fi
 

@@ -20,7 +20,7 @@ wget https://$DOMAIN -O /tmp/index.html
 #wget https://pujcimmoto.cz
 #-O /path/to/folder/file.ext
 
-if grep -q 'Rodinná motopůjčovna nabízející nezapomenutelný zážitek v jedné stopě.' index.html
+if grep -q 'Rodinná motopůjčovna nabízející nezapomenutelný zážitek v jedné stopě.' /tmp/index.html
 then
     finish
     echo "Hledana odpoved nalezena"

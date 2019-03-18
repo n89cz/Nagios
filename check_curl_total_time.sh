@@ -1,6 +1,8 @@
 #!/bin/bash
 
-DOMAIN=$1
+#DOMAIN=$1
+DOMAIN=https://pujcimmoto.cz
+
 
 #curl limits
 CURL_WARN=0.7
@@ -12,18 +14,18 @@ NAGI_WARNING="1"
 NAGI_CRITICAL="2"
 NAGI_UNKNOWN="3"
 
-RESPONSE=`curl -o /dev/null -s -w '%{time_total}' $DOMAIN | tr ',' '.'`
+RESPONSE=`curl --connect-timeout 15 --max-time 15 -o /dev/null -s -w '%{time_total}' $DOMAIN | tr ',' '.'`
 
 if [[ "$RESPONSE" < "$CURL_WARN" ]]; then
     echo "OK - response time: $RESPONSE s"
-    exit $NAGI_OK
+    exit 0
 elif [[ "$RESPONSE" > "$CURL_WARN" && "$RESPONSE" < $CURL_CRIT ]]; then
     echo "Warning - response time: $RESPONSE s"
-    exit $NAGI_WARNING
+    exit 1
 elif [[ "$RESPONSE" > "$CURL_CRIT" ]]; then
     echo "Failure - response time: $RESPONSE s"
-    exit $NAGI_CRITICAL
+    exit 2
 else
     echo "Unknown status - $RESPONSE"
-    exit $NAGI_UNKNOWN
+    exit 3
 fi

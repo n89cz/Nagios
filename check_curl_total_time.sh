@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#DOMAIN=$1
-DOMAIN=https://pujcimmoto.cz
+DOMAIN=$1
+#DOMAIN=https://pujcimmoto.cz
 
 
 #curl limits
@@ -13,6 +13,11 @@ NAGI_OK="0"
 NAGI_WARNING="1"
 NAGI_CRITICAL="2"
 NAGI_UNKNOWN="3"
+
+if [[ -z "$1" ]]; then
+	echo "missing parameter"
+	exit 3
+fi
 
 RESPONSE=`curl --connect-timeout 15 --max-time 15 -o /dev/null -s -w '%{time_total}' $DOMAIN | tr ',' '.'`
 

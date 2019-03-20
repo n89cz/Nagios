@@ -17,9 +17,6 @@
 DOMAIN="$1"
 SEARCHED_STRING="$2"
 
-echo $DOMAIN
-echo $SEARCHED_STRING
-
 C_DATE=`date +%Y%m%d%H%M%S%N`
 
 TMP_FILE="/tmp/$DOMAIN$C_DATE"

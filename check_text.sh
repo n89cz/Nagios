@@ -3,11 +3,6 @@
 # Nagios script to check text on webpage
 # Requires two params. First ($1) is domain name and second ($2) is searched string
 
-
-# 2.
-# Make tmp file name independant - use for example current datetime as name of the file
-
-
 #Nagios return codes
 # 0 OK
 # 1 warning

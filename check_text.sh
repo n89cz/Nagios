@@ -1,20 +1,11 @@
 #!/bin/bash
 #
 # Nagios script to check text on webpage
-#
+# Requires two params. First ($1) is domain name and second ($2) is searched string
 
-#TODO:
-# 1.
-# put searched string to $SEARCHED_STRING and use Nagios to pass the data
-#
-#
+
 # 2.
 # Make tmp file name independant - use for example current datetime as name of the file
-#
-#
-# Make sure the script is universal, only thing you need to change is configuration of Nagios command
-#
-
 
 
 #Nagios return codes
@@ -23,25 +14,32 @@
 # 2 critical
 # 3 unknow
 
-DOMAIN=$1
-SEARCHED_STRING=$2
+DOMAIN="$1"
+SEARCHED_STRING="$2"
+
+echo $DOMAIN
+echo $SEARCHED_STRING
+
+C_DATE=`date +%Y%m%d%H%M%S%N`
+
+TMP_FILE="/tmp/$DOMAIN$C_DATE"
 
 function finish {
-    rm /tmp/pujcimmoto.file
+    rm $TMP_FILE
 }
 
 function file_exists () {
-if [ ! -f /tmp/pujcimmoto.file ]; then
+if [ ! -f $TMP_FILE ]; then
     echo "$1"
     exit 3
 fi
 }
 
-wget $DOMAIN -O /tmp/pujcimmoto.file
+wget $DOMAIN -O $TMP_FILE
 
 file_exists "File not found in step 1"
 
-    if grep -q 'Rodinná půjčovna motocyklů' /tmp/pujcimmoto.file
+    if grep -q "$SEARCHED_STRING" $TMP_FILE
     then
 	file_exists "File not found in step 2"
 	finish

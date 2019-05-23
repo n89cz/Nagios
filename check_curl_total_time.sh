@@ -1,7 +1,6 @@
 #!/bin/bash
 
 DOMAIN=$1
-#DOMAIN=https://pujcimmoto.cz
 
 
 #curl limits
@@ -19,7 +18,7 @@ if [[ -z "$1" ]]; then
 	exit 3
 fi
 
-RESPONSE=`curl --connect-timeout 15 --max-time 15 -o /dev/null -s -w '%{time_total}' $DOMAIN | tr ',' '.'`
+RESPONSE=`curl -A "N89.cz monitoring" --connect-timeout 15 --max-time 15 -o /dev/null -s -w '%{time_total}' $DOMAIN | tr ',' '.'`
 
 if [[ "$RESPONSE" < "$CURL_WARN" ]]; then
     echo "OK - response time: $RESPONSE s"

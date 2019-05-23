@@ -18,7 +18,7 @@ if [ "$#" -ne 1 ]; then
     exit 3
 fi
 
-CURL_OUTPUT=$(curl -s -o /dev/null -w "%{http_code}" $CHECK_URL)
+CURL_OUTPUT=$(curl -A "N89.cz monitoring" --connect-timeout 10 --max-time 10 -s -o /dev/null -w "%{http_code}" $CHECK_URL)
 
 #echo $CURL_OUTPUT
 

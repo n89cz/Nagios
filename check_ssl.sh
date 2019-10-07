@@ -4,7 +4,7 @@
 # TODO:
 #
 # 1.
-# Make the script universal - add servername to variable and pass the argument using Nagios
+# Make the script universal - add servername to variable and pass the argument using Nagios,
 #
 
 
@@ -16,7 +16,8 @@ NAGIOS_WARNING="1"
 NAGIOS_CRITICAL="2"
 NAGIOS_UNKNOWN="3"
 
-NOT_AFTER=$(echo | openssl s_client -showcerts -servername pujcimmoto.cz -connect pujcimmoto.cz:443 2>/dev/null | openssl x509 -inform pem -noout -enddate | sed -e 's#notAfter=##')
+#NOT_AFTER=$(echo | openssl s_client -showcerts -servername pujcimmoto.cz -connect pujcimmoto.cz:443 2>/dev/null | openssl x509 -inform pem -noout -enddate | sed -e 's#notAfter=##')
+NOT_AFTER=$(echo | openssl s_client -showcerts -servername $SRVNAME -connect pujcimmoto.cz:443 2>/dev/null | openssl x509 -inform pem -noout -enddate | sed -e 's#notAfter=##')
 NOT_AFTER_SEC=`date -d "${NOT_AFTER}" '+%s'`
 NOT_AFTER_DATE=`date -d @$NOT_AFTER_SEC`
 
